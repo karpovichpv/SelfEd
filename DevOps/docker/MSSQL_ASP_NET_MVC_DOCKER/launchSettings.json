@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "mssql_asp_net_mvc_docker": "StartDebugging"
+      }
+    }
+  }
+}

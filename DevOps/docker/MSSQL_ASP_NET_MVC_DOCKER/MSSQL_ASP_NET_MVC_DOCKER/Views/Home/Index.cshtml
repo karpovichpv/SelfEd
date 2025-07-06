@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model EmployeesDTO
+
+
+<div class="text-center">
+    <h1 class="display-4">Employees</h1>
+    @{
+        foreach (Employee employee in Model.Employees){
+            <p>Name:@employee.Name; Title:@employee.Title</p>
+        }
+    }
+</div>

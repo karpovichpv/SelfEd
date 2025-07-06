@@ -1,0 +1,31 @@
+networks:
+  demoapp:
+
+services:
+  mssql_asp_net_mvc_docker_db:
+    container_name: mssql-asp-net-mvc-docker-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@12345#
+    networks:
+      - demoapp
+  mssql_asp_net_mvc_docker:
+    container_name: mssql-asp-net-mvc-docker-app
+    image: ${DOCKER_REGISTRY-}mssqlaspnetmvcdocker
+    build:
+      context: .
+      dockerfile: MSSQL_ASP_NET_MVC_DOCKER/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - mssql_asp_net_mvc_docker_db 
+    environment:
+      - DB_HOST=mssql_asp_net_mvc_docker_db
+      - DB_NAME=selfed_mssql_efcore
+      - DB_SA_PASSWORD=12345#
+    networks:
+      - demoapp
+
